@@ -319,11 +319,11 @@ inline bool Position::is_chess960() const { return chess960; }
 
 inline bool Position::capture(Move m) const {
     assert(m.is_ok());
-    return (!empty(m.to_sq()) && m.type_of() != CASTLING) || m.type_of() == EN_PASSANT;
+    return !empty(m.to_sq()) || m.type_of() == EN_PASSANT;
 }
 
 // Returns true if a move is generated from the capture stage, having also
-// queen promotions covered, i.e. consistency with the capture stage move
+// queen promotions and castling moves covered, i.e. consistency with the capture stage move
 // generation is needed to avoid the generation of duplicate moves.
 inline bool Position::capture_stage(Move m) const {
     assert(m.is_ok());

@@ -195,7 +195,7 @@ ExtMove* generate_all(const Position& pos, ExtMove* moveList) {
     while (b)
         *moveList++ = Move(ksq, pop_lsb(b));
 
-    if ((Type == QUIETS || Type == NON_EVASIONS) && pos.can_castle(Us & ANY_CASTLING))
+    if ((Type == CAPTURES || Type == NON_EVASIONS) && pos.can_castle(Us & ANY_CASTLING))
         for (CastlingRights cr : {Us & KING_SIDE, Us & QUEEN_SIDE})
             if (!pos.castling_impeded(cr) && pos.can_castle(cr))
                 *moveList++ = Move::make<CASTLING>(ksq, pos.castling_rook_square(cr));
@@ -206,7 +206,7 @@ ExtMove* generate_all(const Position& pos, ExtMove* moveList) {
 }  // namespace
 
 
-// <CAPTURES>     Generates all pseudo-legal captures plus queen promotions
+// <CAPTURES>     Generates all pseudo-legal captures plus queen promotions and castling moves
 // <QUIETS>       Generates all pseudo-legal non-captures and underpromotions
 // <EVASIONS>     Generates all pseudo-legal check evasions
 // <NON_EVASIONS> Generates all pseudo-legal captures and non-captures
