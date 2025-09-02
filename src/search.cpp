@@ -905,7 +905,7 @@ Value Search::Worker::search(
     {
         depth--;
 
-        if (!allNode)
+        if (!allNode && priorReduction <= 2)
             depth--;
     }
 
